@@ -27,6 +27,18 @@ export class TokenStorageService {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
+  public updateToken(firstName: string, lastName: string, mobileNumber: string): void{
+    let user = localStorage.getItem(USER_KEY);
+    if(user){
+      let localStorageJsonData = JSON.parse(user);
+      localStorageJsonData.firstName = firstName;
+      localStorageJsonData.lastName = lastName;
+      localStorageJsonData.mobileNumber = mobileNumber;
+      localStorage.removeItem(USER_KEY);
+      localStorage.setItem(USER_KEY, JSON.stringify(localStorageJsonData));
+    }
+  }
+
   public getUser(): any {
     const user = localStorage.getItem(USER_KEY);
     if (user) {

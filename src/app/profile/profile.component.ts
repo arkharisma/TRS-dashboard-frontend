@@ -76,7 +76,8 @@ export class ProfileComponent implements OnInit {
       this.userService.putData(this.tokenStorage.getToken(), formUpdateTemp.firstName, formUpdateTemp.lastName, formUpdateTemp.mobileNumber).subscribe(
         data => {
           if(data.success === true){
-            this.ngOnInit();
+            this.tokenStorage.updateToken(formUpdateTemp.firstName, formUpdateTemp.lastName, formUpdateTemp.mobileNumber);
+            window.location.href = "/profile";
           } else {
             this.content = JSON.parse(data.message).message;
           }
