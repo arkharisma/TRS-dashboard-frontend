@@ -35,18 +35,16 @@
           <section class="panel">
               <div class="panel-body">
 
-                  <!-- <form name="form" (ngSubmit)="f.form.valid && updateSubmit()" #f="ngForm" novalidate> -->
                     <form [formGroup]="formUpdate" (ngSubmit)="updateSubmit()" novalidate>
 
                       <div class="row">
                           <div class="col-sm-12">
                               <div class="form-group">
-                                  <label class="control-label">First Name</label>
-                                  <!-- <input type="text" name="firstName" class="form-control" [(ngModel)]="form.firstName" required #firstName="ngModel" placeholder="First Name"> -->
-                                  <input type="text" name="firstName" class="form-control" formControlName="firstName" required placeholder="First Name">
-                                  <!-- <div class="alert alert-danger" role="alert" *ngIf="firstName.errors && f.submitted">
-                                      First Name is required!
-                                    </div> -->
+                                    <label class="control-label">First Name</label>
+                                    <input type="text" name="firstName" class="form-control" formControlName="firstName" required placeholder="First Name">
+                                    <div class="alert alert-danger" role="alert" *ngIf="firstName?.errors?.required && (firstName?.dirty || firstName?.touched)">
+                                        First Name is required!
+                                    </div>
                               </div>
                           </div>
                       </div>
@@ -54,25 +52,23 @@
                       <div class="row" style="margin-top: 2%;">
                           <div class="col-sm-12">
                               <div class="form-group">
-                                  <label class="control-label">Last Name</label>
-                                  <!-- <input type="text" name="lastName" class="form-control" [(ngModel)]="form.lastName" required #lastName="ngModel" placeholder="Last Name"> -->
-                                  <input type="text" name="lastName" class="form-control" required formControlName="lastName" placeholder="Last Name">
-                                  <!-- <div class="alert alert-danger" role="alert" *ngIf="lastName.errors && f.submitted">
-                                      Last Name is required!
-                                    </div> -->
+                                    <label class="control-label">Last Name</label>
+                                    <input type="text" name="lastName" class="form-control" required formControlName="lastName" placeholder="Last Name">
+                                    <div class="alert alert-danger" role="alert" *ngIf="lastName?.errors?.required && (lastName?.dirty || lastName?.touched)">
+                                         Last Name is required!
+                                    </div>
                               </div>
                           </div>
                       </div>
 
                       <div class="row" style="margin-top: 2%;">
                           <div class="col-sm-12">
-                              <div class="form-group">
-                                  <label class="control-label">Mobile Number</label>
-                                  <!-- <input type="text" name="mobileNumber" class="form-control" [(ngModel)]="form.mobileNumber" required #mobileNumber="ngModel" placeholder="Mobile Number"> -->
-                                  <input type="text" name="mobileNumber" class="form-control" required formControlName="mobileNumber" placeholder="Mobile Number">
-                                  <!-- <div class="alert alert-danger" role="alert" *ngIf="mobileNumber.errors && f.submitted">
-                                      Mobile Number is required!
-                                    </div> -->
+                                <div class="form-group">
+                                    <label class="control-label">Mobile Number</label>
+                                    <input type="text" name="mobileNumber" class="form-control" required formControlName="mobileNumber" placeholder="Mobile Number">
+                                    <div class="alert alert-danger" role="alert" *ngIf="mobileNumber?.errors?.required && (mobileNumber?.dirty || mobileNumber?.touched)">
+                                        Mobile Number is required!
+                                    </div>
                               </div>
                           </div>
                       </div>
@@ -93,18 +89,16 @@
         <section class="panel">
             <div class="panel-body">
 
-                <!-- <form [formGroup]="formChangePassword" (ngSubmit)="frm.form.valid && submitChange(frm)" #frm="ngForm" novalidate> -->
                 <form [formGroup]="formChangePassword" (ngSubmit)="submitChange()" novalidate>
 
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="control-label">Username</label>
-                                <!-- <input readonly type="text" name="username" class="form-control" [(ngModel)]="changePassword.username" required #username="ngModel" placeholder="Username"> -->
                                 <input readonly type="text" name="username" class="form-control" formControlName="username" required placeholder="Username">
-                                <!-- <div class="alert alert-danger" role="alert" *ngIf="username.errors && frm.submitted">
+                                <div class="alert alert-danger" role="alert" *ngIf="username?.errors?.required && (username?.dirty || username?.touched)">
                                     Username is required!
-                                  </div> -->
+                                  </div>
                             </div>
                         </div>
                     </div>
@@ -113,11 +107,10 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="control-label">Password</label>
-                                <!-- <input type="password" name="password" class="form-control" [(ngModel)]="changePassword.password" required #password="ngModel" placeholder="Password"> -->
                                 <input type="password" name="password" class="form-control" required formControlName="password" placeholder="Password">
-                                <!-- <div class="alert alert-danger" role="alert" *ngIf="password.errors && frm.submitted">
+                                <div class="alert alert-danger" role="alert" *ngIf="password?.errors?.required && (password?.dirty || password?.touched)">
                                     Password is required!
-                                  </div> -->
+                                  </div>
                             </div>
                         </div>
                     </div>

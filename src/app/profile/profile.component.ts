@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { UserService } from '../_services/user.service';
@@ -12,26 +12,23 @@ import { UserService } from '../_services/user.service';
 export class ProfileComponent implements OnInit {
 
   formUpdate = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    mobileNumber: new FormControl('')
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    mobileNumber: new FormControl('', Validators.required)
   });
+
+  get firstName() { return this.formUpdate.get('firstName'); }
+  get lastName() { return this.formUpdate.get('lastName'); }
+  get mobileNumber() { return this.formUpdate.get('mobileNumber'); }
 
   formChangePassword = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl('')
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
   });
 
-  // form: any = {
-  //   firstName: null,
-  //   lastName: null,
-  //   mobileNumber: null
-  // };
+  get username() { return this.formChangePassword.get('username'); }
+  get password() { return this.formChangePassword.get('password'); }
 
-  // changePassword: any = {
-  //   username: null,
-  //   password: null
-  // };
 
   content?: any;
   page: string = 'Profile';
@@ -50,7 +47,7 @@ export class ProfileComponent implements OnInit {
       this.roles = this.tokenStorage.getUser().roles;
     }
     if(this.isLoggedIn === true && !(this.roles.indexOf('ROLE_USER') == null)) {
-      this.userService.getDataByUserId(this.tokenStorage.getToken(), this.tokenStorage.getUser().id).subscribe(
+      this.userService.getDataByUserId(this.tokenStorage.getToken()).subscribe(
         data => {
           this.content = data.object;
           this.formUpdate.setValue({
@@ -62,14 +59,6 @@ export class ProfileComponent implements OnInit {
             username: data.object.username,
             password: ''
           });
-          // this.form = {
-          //   firstName: data.object.first_name,
-          //   lastName: data.object.last_name,
-          //   mobileNumber: data.object.mobile_number
-          // };
-          // this.changePassword = {
-          //   username: data.object.username
-          // };
         },
         err => {
           this.content = JSON.parse(err.error).message;
@@ -85,12 +74,10 @@ export class ProfileComponent implements OnInit {
     let firstName = formUpdateTemp.firstName;
     let lastName = formUpdateTemp.lastName;
     let mobileNumber = formUpdateTemp.mobileNumber;
-    // const { firstName, lastName, mobileNumber } = this.form;
 
-    this.userService.putData(this.tokenStorage.getToken(), this.tokenStorage.getUser().id, firstName, lastName, mobileNumber).subscribe(
+    this.userService.putData(this.tokenStorage.getToken(), firstName, lastName, mobileNumber).subscribe(
       data => {
         if(data.success === true){
-          // this.dataContent = data.data;
           this.ngOnInit();
         } else {
           this.content = JSON.parse(data.message).message;
@@ -110,11 +97,9 @@ export class ProfileComponent implements OnInit {
 
     console.log(password);
 
-    this.userService.changePassword(this.tokenStorage.getToken(), this.tokenStorage.getUser().id, password).subscribe(
+    this.userService.changePassword(this.tokenStorage.getToken(), password).subscribe(
       data => {
         if(data.success === true){
-          // this.dataContent = data.data;
-          // form.resetForm();
           this.ngOnInit();
         } else {
           this.content = JSON.parse(data.message).message;
