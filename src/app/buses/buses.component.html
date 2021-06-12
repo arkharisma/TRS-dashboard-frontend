@@ -56,14 +56,14 @@
                 </header>
                 <div class="panel-body">
 
-                    <form name="form" (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm" novalidate>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
 
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="control-label">Bus Code</label>
-                                    <input type="text" name="code" class="form-control" [(ngModel)]="form.code" required #code="ngModel" placeholder="Bus Code">
-                                    <div class="alert alert-danger" role="alert" *ngIf="code.errors && f.submitted">
+                                    <input type="text" name="code" class="form-control" required formControlName="code" placeholder="Code">
+                                    <div class="alert alert-danger" role="alert" *ngIf="code?.errors?.required && (code?.dirty || code?.touched)">
                                         Bus Code is required!
                                       </div>
                                 </div>
@@ -74,8 +74,8 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="control-label">Capacity</label>
-                                    <input type="number" name="capacity" class="form-control" [(ngModel)]="form.capacity" required #capacity="ngModel" placeholder="Capacity">
-                                    <div class="alert alert-danger" role="alert" *ngIf="capacity.errors && f.submitted">
+                                    <input type="number" name="capacity" class="form-control" required formControlName="capacity" placeholder="Capacity">
+                                    <div class="alert alert-danger" role="alert" *ngIf="capacity?.errors?.required && (capacity?.dirty || capacity?.touched)">
                                         Capacity is required!
                                       </div>
                                 </div>
@@ -86,8 +86,8 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="control-label">Make/Model</label>
-                                    <input type="text" name="make" class="form-control" [(ngModel)]="form.make" required #make="ngModel" placeholder="Make/Model">
-                                    <div class="alert alert-danger" role="alert" *ngIf="make.errors && f.submitted">
+                                    <input type="text" name="make" class="form-control" required formControlName="make" placeholder="Make">
+                                    <div class="alert alert-danger" role="alert" *ngIf="make?.errors?.required && (make?.dirty || code?.touched)">
                                         Make/Model is required!
                                       </div>
                                 </div>

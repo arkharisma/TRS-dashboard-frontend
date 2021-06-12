@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BusesService } from '../_services/buses.service';
 import { TokenStorageService } from '../_services/token-storage.service';
@@ -12,11 +12,15 @@ import { UserService } from '../_services/user.service';
 })
 export class BusesComponent implements OnInit {
 
-  form: any = {
-    code: null,
-    capacity: null,
-    make: null
-  };
+  form = new FormGroup({
+    code: new FormControl('', Validators.required),
+    capacity: new FormControl('', Validators.required),
+    make: new FormControl('', Validators.required)
+  });
+
+  get code() { return this.form.get('code'); }
+  get capacity() { return this.form.get('capacity'); }
+  get make() { return this.form.get('make'); }
 
   dataContent?: any[];
   page: string = 'Buses';
@@ -42,23 +46,23 @@ export class BusesComponent implements OnInit {
     );
   }
 
-  onSubmit(form: NgForm): void {
-    const { code, capacity, make } = this.form;
+  onSubmit(): void {
+    const formData = this.form.value;
 
-    this.busesService.postData(this.tokenStorage.getToken(), code, capacity, make).subscribe(
-      data => {
-        if(data.success === true){
-          // this.dataContent = data.data;
-          form.resetForm();
-          this.ngOnInit();
-        } else {
-          this.dataContent = JSON.parse(data.message).message;
+    if(this.form.valid){
+      this.busesService.postData(this.tokenStorage.getToken(), formData.code, formData.capacity, formData.make).subscribe(
+        data => {
+          if(data.success === true){
+            this.ngOnInit();
+          } else {
+            this.dataContent = JSON.parse(data.message).message;
+          }
+        },
+        err => {
+          this.dataContent = JSON.parse(err.error).message;
         }
-      },
-      err => {
-        this.dataContent = JSON.parse(err.error).message;
-      }
-    );
+      );
+    }
     
   }
 }
