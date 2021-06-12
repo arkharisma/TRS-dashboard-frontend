@@ -11,8 +11,8 @@ export class TripsService {
 
   constructor(private http: HttpClient) { }
 
-  getAllData(token: string | null, id: string): Observable<any> {
-    return this.http.get(API_URL + 'list/user/' + id, {
+  getAllData(token: string | null): Observable<any> {
+    return this.http.get(API_URL + 'list/user', {
       headers: {
         'Authorization': 'Bearer ' + token
       },
@@ -20,8 +20,8 @@ export class TripsService {
     });
   }
 
-  getBusData(token: string | null, id: string): Observable<any> {
-    return this.http.get('http://localhost:8081/api/v1/bus/list/user/' + id, {
+  getBusData(token: string | null): Observable<any> {
+    return this.http.get('http://localhost:8081/api/v1/bus/list/user', {
       headers: {
         'Authorization': 'Bearer ' + token
       },
@@ -38,8 +38,8 @@ export class TripsService {
     });
   }
 
-  postData(token:string | null, id: string, busCode: string, sourceStop: string, destStop: string, duration: string, fare: number): Observable<any> {
-    return this.http.post(API_URL + 'user/' + id, 
+  postData(token:string | null, busCode: string, sourceStop: string, destStop: string, duration: string, fare: number): Observable<any> {
+    return this.http.post(API_URL + 'user', 
     {
       'bus': busCode,
       'sourceStop': sourceStop,
