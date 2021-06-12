@@ -49,12 +49,31 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/morris.js/morris.css"
+              "node_modules/morris.js/morris.css",
+              "src/assets/vendor/bootstrap/css/bootstrap.css",
+              "src/assets/vendor/font-awesome/css/font-awesome.css",
+              "src/assets/vendor/select2/select2.css",
+              "src/assets/vendor/jquery-datatables-bs3/assets/css/datatables.css",
+              "src/assets/stylesheets/theme.css",
+              "src/assets/stylesheets/skins/default.css",
+              "src/assets/stylesheets/theme-custom.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.js",
               "node_modules/raphael/raphael.js",
-              "node_modules/morris.js/morris.js"
+              "node_modules/morris.js/morris.js",
+              "src/assets/vendor/modernizr/modernizr.js",
+              "src/assets/vendor/jquery/jquery.js",
+              "src/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js",
+              "src/assets/vendor/bootstrap/js/bootstrap.js",
+              "src/assets/vendor/nanoscroller/nanoscroller.js",
+              "src/assets/vendor/select2/select2.js",
+              "src/assets/vendor/jquery-datatables/media/js/jquery.dataTables.js",
+              "src/assets/vendor/jquery-datatables/extras/TableTools/js/dataTables.tableTools.min.js",
+              "src/assets/vendor/jquery-datatables-bs3/assets/js/datatables.js",
+              "src/assets/javascripts/theme.js",
+              "src/assets/javascripts/theme.custom.js",
+              "src/assets/javascripts/theme.init.js"
             ]
           },
           "configurations": {
