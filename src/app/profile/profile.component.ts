@@ -75,18 +75,20 @@ export class ProfileComponent implements OnInit {
     let lastName = formUpdateTemp.lastName;
     let mobileNumber = formUpdateTemp.mobileNumber;
 
-    this.userService.putData(this.tokenStorage.getToken(), firstName, lastName, mobileNumber).subscribe(
-      data => {
-        if(data.success === true){
-          this.ngOnInit();
-        } else {
-          this.content = JSON.parse(data.message).message;
+    if(firstName !== "" && lastName !== "" && (mobileNumber !== 0 || mobileNumber !== "")){
+      this.userService.putData(this.tokenStorage.getToken(), firstName, lastName, mobileNumber).subscribe(
+        data => {
+          if(data.success === true){
+            this.ngOnInit();
+          } else {
+            this.content = JSON.parse(data.message).message;
+          }
+        },
+        err => {
+          this.content = JSON.parse(err.error).message;
         }
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
-      }
-    );
+      );
+    }
     
   }
 
@@ -94,21 +96,20 @@ export class ProfileComponent implements OnInit {
     const formChangePasswordTemp = this.formChangePassword.value;
 
     let password = formChangePasswordTemp.password;
-
-    console.log(password);
-
-    this.userService.changePassword(this.tokenStorage.getToken(), password).subscribe(
-      data => {
-        if(data.success === true){
-          this.ngOnInit();
-        } else {
-          this.content = JSON.parse(data.message).message;
+    if(password !== ""){
+      this.userService.changePassword(this.tokenStorage.getToken(), password).subscribe(
+        data => {
+          if(data.success === true){
+            this.ngOnInit();
+          } else {
+            this.content = JSON.parse(data.message).message;
+          }
+        },
+        err => {
+          this.content = JSON.parse(err.error).message;
         }
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
-      }
-    );
+      );
+    }
     
   }
 }
