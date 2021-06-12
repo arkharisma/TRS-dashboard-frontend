@@ -1,0 +1,109 @@
+<section role="main" class="content-body">
+    <header class="page-header">
+        <h2>{{ page }}</h2>
+    
+        <div class="right-wrapper pull-right">
+            <ol class="breadcrumbs">
+                <li>
+                    <a [routerLink]="['/']">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li><span>{{ page }}</span></li>
+            </ol>
+    
+            <a class="sidebar-right-toggle" data-open="sidebar-right"></a>
+        </div>
+    </header>
+  
+    <div class="row">
+        <div class="col-md-7">
+            <section class="panel">
+                <header class="panel-heading">
+
+                    <h2 class="panel-title">Buses</h2>
+                    <p class="panel-subtitle">Agency owned buses.</p>
+                </header>
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped mb-none" id="datatable-default">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Bus Code</th>
+                                <th>Capacity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="dataContent?.length == 0">
+                                <td colspan="3"><center>Tidak ada data</center></td>
+                            </tr>
+                            <tr *ngFor="let item of dataContent; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ item.code }}</td>
+                                <td>{{ item.capacity }}</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+        <div class="col-md-5">
+            <section class="panel">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Add Bus</h2>
+                    <p class="panel-subtitle">Enter</p>
+                </header>
+                <div class="panel-body">
+
+                    <form name="form" (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm" novalidate>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Bus Code</label>
+                                    <input type="text" name="code" class="form-control" [(ngModel)]="form.code" required #code="ngModel" placeholder="Bus Code">
+                                    <div class="alert alert-danger" role="alert" *ngIf="code.errors && f.submitted">
+                                        Bus Code is required!
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 2%;">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Capacity</label>
+                                    <input type="number" name="capacity" class="form-control" [(ngModel)]="form.capacity" required #capacity="ngModel" placeholder="Capacity">
+                                    <div class="alert alert-danger" role="alert" *ngIf="capacity.errors && f.submitted">
+                                        Capacity is required!
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 2%;">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Make/Model</label>
+                                    <input type="text" name="make" class="form-control" [(ngModel)]="form.make" required #make="ngModel" placeholder="Make/Model">
+                                    <div class="alert alert-danger" role="alert" *ngIf="make.errors && f.submitted">
+                                        Make/Model is required!
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 4%;">
+                            <div class="col-sm-12 text-center">
+                                <input type="submit" class="btn btn-primary" value="Add Bus">
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</section>

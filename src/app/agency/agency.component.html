@@ -1,0 +1,80 @@
+<section role="main" class="content-body">
+    <header class="page-header">
+        <h2>{{ page }}</h2>
+    
+        <div class="right-wrapper pull-right">
+            <ol class="breadcrumbs">
+                <li>
+                    <a [routerLink]="['/']">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li><span>{{ page }}</span></li>
+            </ol>
+    
+            <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+        </div>
+    </header>
+  
+        <div class="row">
+        <div class="col-md-5">
+            <section class="panel">
+                <div class="panel-body text-center" style="padding-top: 5%; padding-bottom: 4%;">
+                    
+                    <div>
+                        <img src="assets/images/apple-touch-icon-precomposed.png">
+                    </div>
+                    <div style="font-size: 1.4rem;font-weight: bold;">
+                        {{ dataContent.name }}
+                    </div>
+                    <div>
+                        {{ dataContent.code }}
+                    </div>
+  
+                </div>
+            </section>
+        </div>
+        <div class="col-md-7">
+            <section class="panel">
+                <div class="panel-body">
+  
+                    <form name="form" (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm" novalidate>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Agency Name</label>
+                                    <input type="text" name="name" class="form-control" [(ngModel)]="form.name" required #name="ngModel" placeholder="Agency Name">
+                                    <div class="alert alert-danger" role="alert" *ngIf="name.errors && f.submitted">
+                                        Agency Name is required!
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 2%;">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Agency Detail</label>
+                                    <input type="text" name="detail" class="form-control" [(ngModel)]="form.detail" required #detail="ngModel" placeholder="Agency Detail">
+                                    <div class="alert alert-danger" role="alert" *ngIf="detail.errors && f.submitted">
+                                        Agency Detail is required!
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 4%;">
+                            <div class="col-sm-12 text-left">
+                                <input type="submit" class="btn btn-primary" value="Update">
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- end: page -->
+  </section>

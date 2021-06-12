@@ -1,0 +1,84 @@
+<!-- start: page -->
+<section class="body-sign">
+  <div class="center-sign">
+    <a href="/" class="logo pull-left">
+      <img src="assets/images/logo.png" height="54" alt="Porto Admin" />
+    </a>
+
+    <div class="panel panel-sign">
+      <div class="panel-title-sign mt-xl text-right">
+        <h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
+      </div>
+      <div class="panel-body">
+        <form 
+        *ngIf="!isLoggedIn"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate>
+          <div class="form-group mb-lg">
+            <label>Username</label>
+            <div class="input-group input-group-icon">
+              <input type="text" name="username" [(ngModel)]="form.username" required #username="ngModel" placeholder="Username" class="form-control input-lg" />
+              <span class="input-group-addon">
+                <span class="icon icon-lg">
+                  <i class="fa fa-user"></i>
+                </span>
+              </span>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="username.errors && f.submitted">
+              Username is required!
+            </div>
+          </div>
+
+          <div class="form-group mb-lg">
+            <div class="clearfix">
+              <label class="pull-left">Password</label>
+            </div>
+            <div class="input-group input-group-icon">
+              <input type="password" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel" placeholder="Password" class="form-control input-lg" />
+              <span class="input-group-addon">
+                <span class="icon icon-lg">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </span>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted" >
+              <div *ngIf="password.errors.required">Password is required</div>
+              <div *ngIf="password.errors.minlength">
+                Password must be at least 6 characters
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <button type="submit" class="btn btn-primary hidden-xs">Sign In</button>
+              <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign In</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed" >
+                  Login failed: {{ errorMessage }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <span class="mt-lg mb-lg line-thru text-center text-uppercase">
+            <span>or</span>
+          </span>
+
+          <p class="text-center">Don't have an account yet? <a href="/register">Sign Up!</a>
+
+        </form>
+      </div>
+    </div>
+
+    <p class="text-center text-muted mt-md mb-md">&copy; Copyright 2018. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+  </div>
+</section>
+<!-- end: page -->

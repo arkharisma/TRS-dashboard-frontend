@@ -1,0 +1,147 @@
+<section role="main" class="content-body">
+    <header class="page-header">
+        <h2>{{ page }}</h2>
+    
+        <div class="right-wrapper pull-right">
+            <ol class="breadcrumbs">
+                <li>
+                    <a [routerLink]="['/']">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li><span>{{ page }}</span></li>
+            </ol>
+    
+            <a class="sidebar-right-toggle" data-open="sidebar-right"></a>
+        </div>
+    </header>
+  
+    <div class="row">
+        <div class="col-md-7">
+            <section class="panel">
+                <header class="panel-heading">
+
+                    <h2 class="panel-title">Trips</h2>
+                    <p class="panel-subtitle">Agency trips.</p>
+                </header>
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped mb-none" id="datatable-default">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Bus Code</th>
+                                <th>Source Stop</th>
+                                <th>Destination Stop</th>
+                                <th>Duration</th>
+                                <th>Fare</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="dataContent?.length == 0">
+                                <td colspan="6"><center>Tidak ada data</center></td>
+                            </tr>
+                            <tr *ngFor="let item of dataContent; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ item.bus.code }}</td>
+                                <td>{{ item.sourceStop.name }}</td>
+                                <td>{{ item.destStop.name }}</td>
+                                <td>{{ item.journeyTime }}</td>
+                                <td>{{ item.fare }}</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+        <div class="col-md-5">
+            <section class="panel">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Add Trip</h2>
+                    <p class="panel-subtitle">Enter</p>
+                </header>
+                <div class="panel-body">
+
+                    <form name="form" (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm" novalidate>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Bus Code</label>
+
+                                    <select [(ngModel)]="form.busCode" name="busCode" class="form-control" #busCode="ngModel" required>
+                                        <option *ngFor="let bus of dataBus" [value]="bus.id">{{ bus.code }}</option>
+                                    </select>
+
+                                    <div class="alert alert-danger" role="alert" *ngIf="busCode.errors && f.submitted">
+                                        Bus Code is required!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 2%;">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Source Stop</label>
+                                    <select [(ngModel)]="form.sourceStop" name="sourceStop" class="form-control" #sourceStop="ngModel" required>
+                                        <option *ngFor="let stop of dataStop" [value]="stop.id">{{ stop.name }}</option>
+                                    </select>
+                                    <div class="alert alert-danger" role="alert" *ngIf="sourceStop.errors && f.submitted">
+                                        Source Stop is required!
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 2%;">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Destination Stop</label>
+                                    <select [(ngModel)]="form.destStop" name="destStop" class="form-control" #destStop="ngModel" required>
+                                        <option *ngFor="let stop of dataStop" [value]="stop.id">{{ stop.name }}</option>
+                                    </select>
+                                    <div class="alert alert-danger" role="alert" *ngIf="destStop.errors && f.submitted">
+                                        Destination Stop is required!
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 2%;">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Duration</label>
+                                    <input type="number" name="duration" class="form-control" [(ngModel)]="form.duration" required #duration="ngModel" placeholder="Duration">
+                                    <div class="alert alert-danger" role="alert" *ngIf="duration.errors && f.submitted">
+                                        Duration is required!
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 2%;">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Fare</label>
+                                    <input type="number" name="fare" class="form-control" [(ngModel)]="form.fare" required #fare="ngModel" placeholder="Fare">
+                                    <div class="alert alert-danger" role="alert" *ngIf="fare.errors && f.submitted">
+                                        Fare is required!
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 4%;">
+                            <div class="col-sm-12 text-center">
+                                <input type="submit" class="btn btn-primary" value="Add Trip">
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
