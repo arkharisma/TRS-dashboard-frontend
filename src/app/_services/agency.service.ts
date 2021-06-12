@@ -11,8 +11,8 @@ export class AgencyService {
 
   constructor(private http: HttpClient) { }
 
-  getAllData(token: string | null, id: string): Observable<any> {
-    return this.http.get(API_URL + 'list/user/' + id, {
+  getDataByUser(token: string | null): Observable<any> {
+    return this.http.get(API_URL + 'user', {
       headers: {
         'Authorization': 'Bearer ' + token
       },
@@ -20,17 +20,8 @@ export class AgencyService {
     });
   }
 
-  getDataByUserId(token: string | null, id: string): Observable<any> {
-    return this.http.get(API_URL + 'user/' + id, {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      },
-      responseType: 'json'
-    });
-  }
-
-  putData(token:string | null, id: string, name: string, detail: string): Observable<any> {
-    return this.http.put(API_URL + id, 
+  putData(token:string | null, name: string, detail: string): Observable<any> {
+    return this.http.put(API_URL, 
     {
       'name': name,
       'details': detail

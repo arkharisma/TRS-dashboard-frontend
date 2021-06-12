@@ -10,8 +10,8 @@ const API_URL = 'http://localhost:8081/api/v1/user/';
 export class UserService {
   constructor(private http: HttpClient) { }
 
-  getDataByUserId(token: string | null, id: string): Observable<any> {
-    return this.http.get(API_URL + id, {
+  getDataByUserId(token: string | null): Observable<any> {
+    return this.http.get(API_URL + 'user', {
       headers: {
         'Authorization': 'Bearer ' + token
       },
@@ -19,8 +19,8 @@ export class UserService {
     });
   }
 
-  putData(token:string | null, id: string, firstName: string, lastName: string, mobileNumber: string): Observable<any> {
-    return this.http.put(API_URL + id, 
+  putData(token:string | null, firstName: string, lastName: string, mobileNumber: string): Observable<any> {
+    return this.http.put(API_URL, 
     {
       'first_name': firstName,
       'last_name': lastName,
@@ -34,8 +34,8 @@ export class UserService {
     });
   }
 
-  changePassword(token: string | null, id: string, password: string): Observable<any> {
-    return this.http.put(API_URL + 'changepassword/' + id, 
+  changePassword(token: string | null, password: string): Observable<any> {
+    return this.http.put(API_URL + 'changepassword', 
     {
       'password': password
     },
