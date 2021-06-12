@@ -16,6 +16,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { AgencyComponent } from './agency/agency.component';
 import { BusesComponent } from './buses/buses.component';
 import { TripsComponent } from './trips/trips.component';
+import { MorrisJsModule } from 'angular-morris-js';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TripsComponent } from './trips/trips.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    MorrisJsModule,
   ],
   providers: [
     authInterceptorProviders

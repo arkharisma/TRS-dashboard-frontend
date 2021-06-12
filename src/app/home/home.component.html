@@ -17,6 +17,33 @@
   </header>
 
       <div class="row">
+        <div class="col-md-7">
+            <section class="panel">
+                <header class="panel-heading">    
+                    <h2 class="panel-title">Sales Overview</h2>
+                    <p class="panel-subtitle">Ample Admin vs Pixel Admin</p>
+                </header>
+                <div class="panel-body">
+    
+                    <!-- Morris: Bar -->
+                    <div mkMorrisJs="Bar" [options]="chartBarOptions" [data]="chartBarData" type="Bar" style="height: 400px; width: 100%"></div>
+    
+                </div>
+            </section>
+        </div>
+        <div class="col-md-5">
+            <section class="panel">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Our Visitors</h2>
+                    <p class="panel-subtitle">Different Devices Used to Visit.</p>
+                </header>
+                <div class="panel-body">
+    
+                    <div mkMorrisJs="Donut" [options]="chartDonutOptions" [data]="chartDonutData" style="height: 200px; width: 100%"></div>
+                    
+                </div>
+            </section>
+        </div>
       </div>
   <!-- end: page -->
 </section>
