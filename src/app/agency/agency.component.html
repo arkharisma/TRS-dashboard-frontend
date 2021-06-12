@@ -25,10 +25,10 @@
                         <img src="assets/images/apple-touch-icon-precomposed.png">
                     </div>
                     <div style="font-size: 1.4rem;font-weight: bold;">
-                        {{ dataContent.name }}
+                        {{ dataContent?.name }}
                     </div>
                     <div>
-                        {{ dataContent.code }}
+                        {{ dataContent?.code }}
                     </div>
   
                 </div>
@@ -38,14 +38,14 @@
             <section class="panel">
                 <div class="panel-body">
   
-                    <form name="form" (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm" novalidate>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
 
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="control-label">Agency Name</label>
-                                    <input type="text" name="name" class="form-control" [(ngModel)]="form.name" required #name="ngModel" placeholder="Agency Name">
-                                    <div class="alert alert-danger" role="alert" *ngIf="name.errors && f.submitted">
+                                    <input type="text" name="name" class="form-control" required formControlName="name" placeholder="Name">
+                                    <div class="alert alert-danger" role="alert" *ngIf="name?.errors?.required && (name?.dirty || name?.touched)">
                                         Agency Name is required!
                                       </div>
                                 </div>
@@ -56,8 +56,8 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="control-label">Agency Detail</label>
-                                    <input type="text" name="detail" class="form-control" [(ngModel)]="form.detail" required #detail="ngModel" placeholder="Agency Detail">
-                                    <div class="alert alert-danger" role="alert" *ngIf="detail.errors && f.submitted">
+                                    <input type="text" name="detail" class="form-control" required formControlName="detail" placeholder="Details">
+                                    <div class="alert alert-danger" role="alert" *ngIf="detail?.errors?.required && (detail?.dirty || detail?.touched)">
                                         Agency Detail is required!
                                       </div>
                                 </div>
