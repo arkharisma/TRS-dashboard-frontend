@@ -75,7 +75,7 @@
 
                       <div class="row" style="margin-top: 4%;">
                           <div class="col-sm-12 text-left">
-                              <input type="submit" class="btn btn-primary" value="Update Profile">
+                              <input [disabled]="!formUpdate.valid" type="submit" class="btn btn-primary" value="Update Profile">
                           </div>
                       </div>
 
@@ -117,7 +117,7 @@
 
                     <div class="row" style="margin-top: 4%;">
                         <div class="col-sm-12 text-left">
-                            <input type="submit" class="btn btn-primary" value="Change Password">
+                            <input [disabled]="!formChangePassword.valid" type="submit" class="btn btn-primary" value="Change Password">
                         </div>
                     </div>
 

@@ -134,7 +134,7 @@
 
                         <div class="row" style="margin-top: 4%;">
                             <div class="col-sm-12 text-center">
-                                <input type="submit" class="btn btn-primary" value="Add Trip">
+                                <input [disabled]="!form.valid" type="submit" class="btn btn-primary" value="Add Trip">
                             </div>
                         </div>
 
