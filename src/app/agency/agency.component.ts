@@ -32,7 +32,7 @@ export class AgencyComponent implements OnInit {
       this.roles = this.tokenStorage.getUser().roles;
     }
     if(this.isLoggedIn === true && !(this.roles.indexOf('ROLE_USER') == null)) {
-      this.agencyService.getDataByUserId(this.tokenStorage.getToken(), this.tokenStorage.getUser().id).subscribe(
+      this.agencyService.getDataByUser(this.tokenStorage.getToken()).subscribe(
         data => {
           this.dataContent = data.object;
           this.form = {
@@ -52,7 +52,7 @@ export class AgencyComponent implements OnInit {
   onSubmit(form: NgForm): void {
     const { name, detail } = this.form;
 
-    this.agencyService.putData(this.tokenStorage.getToken(), this.tokenStorage.getUser().id, name, detail).subscribe(
+    this.agencyService.putData(this.tokenStorage.getToken(), name, detail).subscribe(
       data => {
         if(data.success === true){
           // this.dataContent = data.data;

@@ -31,7 +31,7 @@ export class TripsComponent implements OnInit {
   constructor(private tripsService: TripsService, private tokenStorage: TokenStorageService, private router: Router) { }
 
   ngOnInit(): void {
-    this.tripsService.getAllData(this.tokenStorage.getToken(), this.tokenStorage.getUser().id).subscribe(
+    this.tripsService.getAllData(this.tokenStorage.getToken()).subscribe(
       data => {
         if(data.success === true){
           this.dataContent = data.data;
@@ -44,7 +44,7 @@ export class TripsComponent implements OnInit {
       }
     );
 
-    this.tripsService.getBusData(this.tokenStorage.getToken(), this.tokenStorage.getUser().id).subscribe(
+    this.tripsService.getBusData(this.tokenStorage.getToken()).subscribe(
       data => {
         if(data.success === true){
           this.dataBus = data.data;
@@ -75,7 +75,7 @@ export class TripsComponent implements OnInit {
   onSubmit(form: NgForm): void {
     const { busCode, sourceStop, destStop, duration, fare } = this.form;
 
-    this.tripsService.postData(this.tokenStorage.getToken(), this.tokenStorage.getUser().id, busCode, sourceStop, destStop, duration, fare).subscribe(
+    this.tripsService.postData(this.tokenStorage.getToken(), busCode, sourceStop, destStop, duration, fare).subscribe(
       data => {
         if(data.success === true){
           // this.dataContent = data.data;
