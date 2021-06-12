@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
@@ -9,16 +10,27 @@ import { TokenStorageService } from '../_services/token-storage.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  form: any = {
-    username: null,
-    firstName: null,
-    lastName: null,
-    mobileNumber: null,
-    password: null,
-    agencyName: null,
-    agencyCode:null,
-    agencyDetails: null
-  };
+
+  form = new FormGroup({
+    username: new FormControl('', Validators.required),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    mobileNumber: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    agencyName: new FormControl('', Validators.required),
+    agencyCode: new FormControl('', Validators.required),
+    agencyDetails: new FormControl('', Validators.required)
+  });
+
+  get username() { return this.form.get('username'); }
+  get firstName() { return this.form.get('firstName'); }
+  get lastName() { return this.form.get('lastName'); }
+  get mobileNumber() { return this.form.get('mobileNumber'); }
+  get password() { return this.form.get('password'); }
+  get agencyName() { return this.form.get('agencyName'); }
+  get agencyCode() { return this.form.get('agencyCode'); }
+  get agencyDetails() { return this.form.get('agencyDetails'); }
+
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
@@ -30,22 +42,22 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { username, firstName, lastName, mobileNumber, password, agencyName, agencyCode, agencyDetails} = this.form;
+    const formData = this.form.value;
 
-    console.log(this.form);
+    if(this.form.valid){
+      this.authService.register(formData.username, formData.firstName, formData.lastName, formData.mobileNumber, formData.password, formData.agencyName, formData.agencyCode, formData.agencyDetails).subscribe(
+        data => {
+          this.isSuccessful = true;
+          this.isSignUpFailed = false;
 
-    this.authService.register(username, firstName, lastName, mobileNumber, password, agencyName, agencyCode, agencyDetails).subscribe(
-      data => {
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-
-        this.login(username, password);
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
+          this.login(formData.username, formData.password);
+        },
+        err => {
+          this.errorMessage = err.error.message;
+          this.isSignUpFailed = true;
+        }
+      );
+    }
   }
 
   login(username: string, password: string): void{

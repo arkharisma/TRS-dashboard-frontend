@@ -10,92 +10,81 @@
         <h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Sign Up</h2>
       </div>
       <div class="panel-body">
-        <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <form *ngIf="!isSuccessful" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
           <div class="form-group mb-lg">
             <label>First Name</label>
-            <input type="text" name="firstName" [(ngModel)]="form.firstName" required #firstName="ngModel" placeholder="First Name" class="form-control input-md" />
-            <div class="alert-danger" *ngIf="firstName.errors && f.submitted">
-              <div *ngIf="firstName.errors.required">First Name is required</div>
+            <input type="text" name="firstName" class="form-control input-md" required formControlName="firstName" placeholder="First Name">
+            <div class="alert alert-danger" role="alert" *ngIf="firstName?.errors?.required && (firstName?.dirty || firstName?.touched)">
+              First Name is required!
             </div>
           </div>
 
           <div class="form-group mb-lg">
             <label>Last Name</label>
-            <input type="text" name="lastName" [(ngModel)]="form.lastName" required #lastName="ngModel" placeholder="Last Name" class="form-control input-md" />
-            <div class="alert-danger" *ngIf="lastName.errors && f.submitted">
-              <div *ngIf="lastName.errors.required">Last Name is required</div>
+            <input type="text" name="lastName" class="form-control input-md" required formControlName="lastName" placeholder="Last Name">
+            <div class="alert alert-danger" role="alert" *ngIf="lastName?.errors?.required && (lastName?.dirty || lastName?.touched)">
+              Last Name is required!
             </div>
           </div>
 
           <div class="form-group mb-lg">
             <label>Username</label>
-            <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required minlength="3" maxlength="50" #username="ngModel" placeholder="Username" class="form-control input-md" />
-            <div class="alert-danger" *ngIf="username.errors && f.submitted">
-              <div *ngIf="username.errors.required">
-                Username is required
-              </div>
-              <div *ngIf="username.errors.minlength">
-                Username must be at least 3 characters
-              </div>
-              <div *ngIf="username.errors.maxlength">
-                Username must be at most 20 characters
-              </div>
+            <input type="text" name="username" class="form-control input-md" required formControlName="username" placeholder="Username">
+            <div class="alert alert-danger" role="alert" *ngIf="username?.errors?.required && (username?.dirty || username?.touched)">
+              Username is required!
             </div>
           </div>
 
           <div class="form-group mb-lg">
             <label>Mobile Number</label>
-            <input type="text" name="mobileNumber" [(ngModel)]="form.mobileNumber" required #mobileNumber="ngModel" placeholder="Mobile Number" class="form-control input-md" />
-            <div class="alert-danger" *ngIf="mobileNumber.errors && f.submitted">
-              <div *ngIf="mobileNumber.errors.required">Mobile Number is required</div>
+            <input type="text" name="mobileNumber" class="form-control input-md" required formControlName="mobileNumber" placeholder="Mobile Number">
+            <div class="alert alert-danger" role="alert" *ngIf="mobileNumber?.errors?.required && (mobileNumber?.dirty || mobileNumber?.touched)">
+              Mobile Number is required!
             </div>
           </div>
 
           <div class="form-group mb-lg">
             <label>Password</label>
-            <input type="password" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel" placeholder="Password" class="form-control input-md" />
-            <div class="alert-danger" *ngIf="password.errors && f.submitted">
-              <div *ngIf="password.errors.required">Password is required</div>
-              <div *ngIf="password.errors.minlength">
-                Password must be at least 6 characters
-              </div>
+            <input type="password" name="password" class="form-control input-md" required formControlName="password" placeholder="Password" autocomplete="on">
+            <div class="alert alert-danger" role="alert" *ngIf="password?.errors?.required && (password?.dirty || password?.touched)">
+              Password is required!
             </div>
           </div>
 
           <div class="form-group mb-lg">
             <label>Agency Name</label>
-            <input type="text" name="agencyName" [(ngModel)]="form.agencyName" required #agencyName="ngModel" placeholder="Agency Name" class="form-control input-md" />
-            <div class="alert-danger" *ngIf="agencyName.errors && f.submitted">
-              <div *ngIf="agencyName.errors.required">Agency Name is required</div>
+            <input type="text" name="agencyName" class="form-control input-md" required formControlName="agencyName" placeholder="Agency Name">
+            <div class="alert alert-danger" role="alert" *ngIf="agencyName?.errors?.required && (agencyName?.dirty || agencyName?.touched)">
+              Agency Name is required!
             </div>
           </div>
 
           <div class="form-group mb-lg">
             <label>Agency Code</label>
-            <input type="text" name="agencyCode" [(ngModel)]="form.agencyCode" required #agencyCode="ngModel" placeholder="Agency Code" class="form-control input-md" />
-            <div class="alert-danger" *ngIf="agencyCode.errors && f.submitted">
-              <div *ngIf="agencyCode.errors.required">Agency Code is required</div>
+            <input type="text" name="agencyCode" class="form-control input-md" required formControlName="agencyCode" placeholder="Agency Code">
+            <div class="alert alert-danger" role="alert" *ngIf="agencyCode?.errors?.required && (agencyCode?.dirty || agencyCode?.touched)">
+              Agency Code is required!
             </div>
           </div>
 
           <div class="form-group mb-lg">
             <label>Agency Details</label>
-            <input type="text" name="agencyDetails" [(ngModel)]="form.agencyDetails" required #agencyDetails="ngModel" placeholder="Agency Details" class="form-control input-md" />
-            <div class="alert-danger" *ngIf="agencyDetails.errors && f.submitted">
-              <div *ngIf="agencyDetails.errors.required">Agency Details is required</div>
+            <input type="text" name="agencyDetails" class="form-control input-md" required formControlName="agencyDetails" placeholder="Agency Details">
+            <div class="alert alert-danger" role="alert" *ngIf="agencyDetails?.errors?.required && (agencyDetails?.dirty || agencyDetails?.touched)">
+              Agency Details is required!
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-12 text-center">
-              <button type="submit" class="btn btn-primary hidden-xs">Sign Up</button>
-              <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign Up</button>
+              <button [disabled]="!form.valid" type="submit" class="btn btn-primary hidden-xs">Sign Up</button>
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-12 text-center">
-              <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+              <div class="alert alert-warning" *ngIf="isSignUpFailed">
                 Signup failed!<br />{{ errorMessage }}
               </div>
             </div>
