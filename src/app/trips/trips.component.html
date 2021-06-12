@@ -62,18 +62,18 @@
                 </header>
                 <div class="panel-body">
 
-                    <form name="form" (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm" novalidate>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
 
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="control-label">Bus Code</label>
 
-                                    <select [(ngModel)]="form.busCode" name="busCode" class="form-control" #busCode="ngModel" required>
+                                    <select name="busCode" class="form-control" formControlName="busCode" required>
                                         <option *ngFor="let bus of dataBus" [value]="bus.id">{{ bus.code }}</option>
                                     </select>
 
-                                    <div class="alert alert-danger" role="alert" *ngIf="busCode.errors && f.submitted">
+                                    <div class="alert alert-danger" role="alert" *ngIf="busCode?.errors?.required && (busCode?.dirty || busCode?.touched)">
                                         Bus Code is required!
                                     </div>
                                 </div>
@@ -84,10 +84,10 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="control-label">Source Stop</label>
-                                    <select [(ngModel)]="form.sourceStop" name="sourceStop" class="form-control" #sourceStop="ngModel" required>
+                                    <select name="sourceStop" class="form-control" formControlName="sourceStop" required>
                                         <option *ngFor="let stop of dataStop" [value]="stop.id">{{ stop.name }}</option>
                                     </select>
-                                    <div class="alert alert-danger" role="alert" *ngIf="sourceStop.errors && f.submitted">
+                                    <div class="alert alert-danger" role="alert" *ngIf="sourceStop?.errors?.required && (sourceStop?.dirty || sourceStop?.touched)">
                                         Source Stop is required!
                                       </div>
                                 </div>
@@ -98,10 +98,10 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="control-label">Destination Stop</label>
-                                    <select [(ngModel)]="form.destStop" name="destStop" class="form-control" #destStop="ngModel" required>
+                                    <select name="destStop" class="form-control" formControlName="destStop" required>
                                         <option *ngFor="let stop of dataStop" [value]="stop.id">{{ stop.name }}</option>
                                     </select>
-                                    <div class="alert alert-danger" role="alert" *ngIf="destStop.errors && f.submitted">
+                                    <div class="alert alert-danger" role="alert" *ngIf="destStop?.errors?.required && (destStop?.dirty || destStop?.touched)">
                                         Destination Stop is required!
                                       </div>
                                 </div>
@@ -112,8 +112,8 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="control-label">Duration</label>
-                                    <input type="number" name="duration" class="form-control" [(ngModel)]="form.duration" required #duration="ngModel" placeholder="Duration">
-                                    <div class="alert alert-danger" role="alert" *ngIf="duration.errors && f.submitted">
+                                    <input type="number" name="duration" class="form-control" required formControlName="duration" placeholder="Duration">
+                                    <div class="alert alert-danger" role="alert" *ngIf="duration?.errors?.required && (duration?.dirty || duration?.touched)">
                                         Duration is required!
                                       </div>
                                 </div>
@@ -124,8 +124,8 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="control-label">Fare</label>
-                                    <input type="number" name="fare" class="form-control" [(ngModel)]="form.fare" required #fare="ngModel" placeholder="Fare">
-                                    <div class="alert alert-danger" role="alert" *ngIf="fare.errors && f.submitted">
+                                    <input type="number" name="fare" class="form-control" required formControlName="fare" placeholder="Fare">
+                                    <div class="alert alert-danger" role="alert" *ngIf="fare?.errors?.required && (fare?.dirty || fare?.touched)">
                                         Fare is required!
                                       </div>
                                 </div>

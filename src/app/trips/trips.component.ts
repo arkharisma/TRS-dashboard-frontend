@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { TripsService } from '../_services/trips.service';
@@ -11,13 +11,19 @@ import { TripsService } from '../_services/trips.service';
 })
 export class TripsComponent implements OnInit {
 
-  form: any = {
-    busCode: null,
-    sourceStop: null,
-    destStop: null,
-    duration: null,
-    fare: null
-  };
+  form = new FormGroup({
+    busCode: new FormControl('', Validators.required),
+    sourceStop: new FormControl('', Validators.required),
+    destStop: new FormControl('', Validators.required),
+    duration: new FormControl('', Validators.required),
+    fare: new FormControl('', Validators.required)
+  });
+
+  get busCode() { return this.form.get('busCode'); }
+  get sourceStop() { return this.form.get('sourceStop'); }
+  get destStop() { return this.form.get('destStop'); }
+  get duration() { return this.form.get('duration'); }
+  get fare() { return this.form.get('fare'); }
 
   dataContent?: any[];
   dataBus?: any[];
@@ -72,22 +78,28 @@ export class TripsComponent implements OnInit {
 
   }
 
-  onSubmit(form: NgForm): void {
-    const { busCode, sourceStop, destStop, duration, fare } = this.form;
+  onSubmit(): void {
+    const formData = this.form.value;
 
-    this.tripsService.postData(this.tokenStorage.getToken(), busCode, sourceStop, destStop, duration, fare).subscribe(
-      data => {
-        if(data.success === true){
-          // this.dataContent = data.data;
-          form.resetForm();
-          this.ngOnInit();
-        } else {
-          this.dataContent = JSON.parse(data.message).message;
+    let busCode = formData.busCode;
+    let sourceStop = formData.sourceStop;
+    let destStop = formData.destStop;
+    let duration = formData.duration;
+    let fare = formData.fare;
+
+    if(busCode !== "" && sourceStop !== "" && destStop !== "" && (duration !== "" || duration !== 0) && (fare !== "" && fare !== 0)){
+      this.tripsService.postData(this.tokenStorage.getToken(), busCode, sourceStop, destStop, duration, fare).subscribe(
+        data => {
+          if(data.success === true){
+            this.ngOnInit();
+          } else {
+            this.dataContent = JSON.parse(data.message).message;
+          }
+        },
+        err => {
+          this.dataContent = JSON.parse(err.error).message;
         }
-      },
-      err => {
-        this.dataContent = JSON.parse(err.error).message;
-      }
-    );
+      );
+    }
   }
 }
