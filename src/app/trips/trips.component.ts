@@ -81,14 +81,8 @@ export class TripsComponent implements OnInit {
   onSubmit(): void {
     const formData = this.form.value;
 
-    let busCode = formData.busCode;
-    let sourceStop = formData.sourceStop;
-    let destStop = formData.destStop;
-    let duration = formData.duration;
-    let fare = formData.fare;
-
-    if(busCode !== "" && sourceStop !== "" && destStop !== "" && (duration !== "" || duration !== 0) && (fare !== "" && fare !== 0)){
-      this.tripsService.postData(this.tokenStorage.getToken(), busCode, sourceStop, destStop, duration, fare).subscribe(
+    if(this.form.valid){
+      this.tripsService.postData(this.tokenStorage.getToken(), formData.busCode, formData.sourceStop, formData.destStop, formData.duration, formData.fare).subscribe(
         data => {
           if(data.success === true){
             this.ngOnInit();

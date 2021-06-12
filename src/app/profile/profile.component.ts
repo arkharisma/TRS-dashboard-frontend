@@ -71,12 +71,9 @@ export class ProfileComponent implements OnInit {
 
   updateSubmit(): void {
     const formUpdateTemp = this.formUpdate.value;
-    let firstName = formUpdateTemp.firstName;
-    let lastName = formUpdateTemp.lastName;
-    let mobileNumber = formUpdateTemp.mobileNumber;
 
-    if(firstName !== "" && lastName !== "" && (mobileNumber !== 0 || mobileNumber !== "")){
-      this.userService.putData(this.tokenStorage.getToken(), firstName, lastName, mobileNumber).subscribe(
+    if(this.formUpdate.valid){
+      this.userService.putData(this.tokenStorage.getToken(), formUpdateTemp.firstName, formUpdateTemp.lastName, formUpdateTemp.mobileNumber).subscribe(
         data => {
           if(data.success === true){
             this.ngOnInit();
@@ -95,9 +92,8 @@ export class ProfileComponent implements OnInit {
   submitChange(): void {
     const formChangePasswordTemp = this.formChangePassword.value;
 
-    let password = formChangePasswordTemp.password;
-    if(password !== ""){
-      this.userService.changePassword(this.tokenStorage.getToken(), password).subscribe(
+    if(this.formChangePassword.valid){
+      this.userService.changePassword(this.tokenStorage.getToken(), formChangePasswordTemp.password).subscribe(
         data => {
           if(data.success === true){
             this.ngOnInit();
